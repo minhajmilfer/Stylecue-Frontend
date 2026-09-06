@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowLeft, Palette } from "lucide-react";
+import { Palette } from "lucide-react";
 
 const skinTonePalette = [
   {
@@ -101,10 +101,36 @@ export default function SkinTonePage() {
     ) || skinTonePalette[3];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#321347] to-[#581c4e] text-white flex flex-col justify-between p-6 md:p-12 relative overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-gradient-to-br from-[#2d1b4e] via-[#3d1a58] to-[#5c1c5c] text-white flex flex-col justify-between p-4 md:p-6 font-sans select-none overflow-hidden">
       
+      {/* Top-Left Corner Curve Signature */}
+      <div className="absolute top-0 left-0 pointer-events-none opacity-45">
+        <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M -20 200 C 70 200 200 70 200 -20" stroke="url(#cornerGradTL)" strokeWidth="2" strokeDasharray="4 4" />
+          <defs>
+            <linearGradient id="cornerGradTL" x1="0" y1="0" x2="240" y2="240" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#fbbf24" stopOpacity="0.9" />
+              <stop offset="1" stopColor="#a855f7" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      {/* Bottom-Right Corner Curve Signature */}
+      <div className="absolute bottom-0 right-0 pointer-events-none opacity-45">
+        <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 260 40 C 170 40 40 170 40 260" stroke="url(#cornerGradBR)" strokeWidth="2" strokeDasharray="4 4" />
+          <defs>
+            <linearGradient id="cornerGradBR" x1="240" y1="240" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#fbbf24" stopOpacity="0.9" />
+              <stop offset="1" stopColor="#a855f7" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
       {/* Top Header & Progress Bar */}
-      <header className="w-full max-w-5xl mx-auto space-y-4">
+      <header className="relative z-10 w-full max-w-5xl mx-auto space-y-1.5 shrink-0">
         <div className="flex justify-between items-center text-xs md:text-sm font-semibold tracking-wider text-purple-200/80">
           <Link href="/" className="flex items-center gap-2.5 group">
             <Image 
@@ -114,101 +140,101 @@ export default function SkinTonePage() {
               height={28} 
               priority
               style={{ width: "auto", height: "auto" }}
-              className="drop-shadow-[0_0_8px_rgba(255,255,255,0.25)] transition-transform group-hover:scale-105"
+              className="drop-shadow-[0_0_8px_rgba(255,255,255,0.25)] transition-transform group-hover:scale-105 shrink-0"
             />
-            <span className="uppercase font-bold tracking-widest text-white">
+            <span className="uppercase font-bold tracking-widest text-white text-xs md:text-sm">
               STYLECUE
             </span>
           </Link>
-          <span className="text-amber-400">STEP 4 OF 6 (66%)</span>
+          <span className="text-amber-400 text-xs font-semibold">STEP 4 OF 6 (66%)</span>
         </div>
-        <p className="text-[10px] tracking-widest text-white/60 font-medium mb-3 uppercase">
+        <p className="text-[10px] tracking-widest text-white/60 font-medium uppercase">
           AI Stylist Assistant Path
         </p>
         <div className="w-full h-1.5 bg-purple-950/60 rounded-full overflow-hidden border border-purple-800/30">
           <div
-            className="h-full bg-gradient-to-r from-amber-400 to-yellow-300 transition-all duration-300 ease-out"
+            className="h-full bg-amber-400 transition-all duration-300 ease-out rounded-full shadow-[0_0_8px_rgba(251,191,36,0.6)]"
             style={{ width: "66%" }}
           ></div>
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main className="w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center py-6 space-y-8">
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl md:text-5xl font-light tracking-wide text-white">
+      <main className="relative z-10 w-full max-w-4xl mx-auto flex-grow flex flex-col justify-center my-auto py-2 space-y-4">
+        <div className="text-center space-y-1">
+          <h1 className="text-2xl md:text-4xl font-light tracking-wide text-white">
             Colour Matching
           </h1>
-          <p className="text-purple-200/70 text-sm md:text-base max-w-md mx-auto">
+          <p className="text-purple-200/70 text-xs md:text-sm max-w-md mx-auto">
             We analyze your skin undertones to suggest palettes that make you pop.
           </p>
         </div>
 
-        {/* Main Content Card (Frosted Glass Container) */}
-        <div className="bg-purple-950/30 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-6 md:p-10 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+        {/* Main Content Card Container */}
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-6 shadow-2xl flex flex-col md:flex-row gap-4 md:gap-6 items-center">
           
-          {/* Left Side: Dynamic Large Circle Preview */}
-          <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center space-y-4 w-full md:w-64 shrink-0 shadow-lg">
-            <span className="uppercase tracking-wider text-purple-200/80 text-xs font-semibold">
-              Selected Skin Tone
+          {/* Left Side: Dynamic Circle Preview Box */}
+          <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-4 flex flex-col items-center text-center space-y-2 w-full md:w-56 shrink-0 shadow-lg">
+            <span className="uppercase tracking-wider text-purple-200/80 text-[10px] font-semibold">
+              SELECTED SKIN TONE
             </span>
             
-            <div className="relative group my-2">
+            <div className="relative group my-1">
               <div
                 className="absolute -inset-1 rounded-full opacity-70 blur-md transition-all duration-300"
                 style={{ backgroundColor: currentProfile.hex }}
               ></div>
               <div
-                className="relative w-36 h-36 md:w-40 md:h-40 rounded-full border-4 border-white/80 shadow-2xl transition-colors duration-200"
+                className="relative w-28 h-28 md:w-32 md:h-32 rounded-full border-2 border-white/80 shadow-xl transition-colors duration-200"
                 style={{ backgroundColor: currentProfile.hex }}
               ></div>
             </div>
 
-            <div className="space-y-1">
-              <h3 className="text-xl font-semibold text-amber-300 transition-all duration-200">
+            <div className="space-y-0.5">
+              <h3 className="text-sm md:text-base font-semibold text-amber-300 transition-all duration-200">
                 {currentProfile.label}
               </h3>
-              <p className="text-purple-200/60 text-xs leading-relaxed">
+              <p className="text-purple-200/60 text-[10px]">
                 This is your current preview tone.
               </p>
             </div>
           </div>
 
-          {/* Right Side: Interactive Slider & Dynamic Text */}
-          <div className="flex-grow w-full space-y-8">
+          {/* Right Side: Interactive Slider & Color Recommendations */}
+          <div className="flex-grow w-full space-y-4">
             
             {/* Slider Section */}
-            <div className="space-y-4">
-              <div className="flex justify-between text-xs md:text-sm font-medium text-purple-200/80 px-2">
+            <div className="space-y-2">
+              <div className="flex justify-between text-[11px] font-medium text-purple-200/80 px-1">
                 <span>Fair</span>
                 <span>Medium</span>
                 <span>Rich / Deep</span>
               </div>
 
-              {/* Skin Tone Gradient Bar with White-Bordered Custom Thumb */}
-              <div className="relative py-2">
+              {/* Skin Tone Gradient Bar */}
+              <div className="relative py-1">
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={sliderValue}
                   onChange={(e) => setSliderValue(Number(e.target.value))}
-                  className="w-full h-4 rounded-full appearance-none cursor-pointer outline-none shadow-inner border border-amber-300/30
+                  className="w-full h-3 rounded-full appearance-none cursor-pointer outline-none shadow-inner border border-amber-300/30
                     [&::-webkit-slider-thumb]:appearance-none 
-                    [&::-webkit-slider-thumb]:w-7 
-                    [&::-webkit-slider-thumb]:h-7 
+                    [&::-webkit-slider-thumb]:w-6 
+                    [&::-webkit-slider-thumb]:h-6 
                     [&::-webkit-slider-thumb]:rounded-full 
                     [&::-webkit-slider-thumb]:bg-amber-400 
-                    [&::-webkit-slider-thumb]:border-4 
+                    [&::-webkit-slider-thumb]:border-2 
                     [&::-webkit-slider-thumb]:border-white 
                     [&::-webkit-slider-thumb]:shadow-md 
                     [&::-webkit-slider-thumb]:transition-transform 
                     [&::-webkit-slider-thumb]:hover:scale-110 
-                    [&::-moz-range-thumb]:w-7 
-                    [&::-moz-range-thumb]:h-7 
+                    [&::-moz-range-thumb]:w-6 
+                    [&::-moz-range-thumb]:h-6 
                     [&::-moz-range-thumb]:rounded-full 
                     [&::-moz-range-thumb]:bg-amber-400 
-                    [&::-moz-range-thumb]:border-4 
+                    [&::-moz-range-thumb]:border-2 
                     [&::-moz-range-thumb]:border-white 
                     [&::-moz-range-thumb]:shadow-md"
                   style={{
@@ -218,36 +244,36 @@ export default function SkinTonePage() {
                 />
               </div>
 
-              {/* Dynamic Selected Labels & Detail Info */}
-              <div className="text-center space-y-1 pt-2">
-                <div className="text-amber-300 font-semibold tracking-wider text-sm md:text-base uppercase">
-                  Selected: <span className="text-white font-bold">{currentProfile.label}</span>
+              {/* Dynamic Labels */}
+              <div className="text-center space-y-0.5 pt-1">
+                <div className="text-amber-300 font-semibold tracking-wider text-xs md:text-sm uppercase">
+                  SELECTED: <span className="text-white font-bold">{currentProfile.label}</span>
                 </div>
-                <div className="text-purple-200/60 text-xs">
+                <div className="text-purple-200/60 text-[10px]">
                   Depth: {currentProfile.depth} &nbsp;|&nbsp; Undertone: {currentProfile.undertone}
                 </div>
               </div>
             </div>
 
             {/* Stylist Tip & Dynamic Color Recommendation Box */}
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6 space-y-6 flex flex-col md:flex-row gap-6 items-center backdrop-blur-md">
-              <div className="flex items-start gap-3 flex-1">
-                <Palette className="w-6 h-6 text-amber-300 shrink-0 mt-0.5" />
-                <div className="text-purple-100 text-xs md:text-sm leading-relaxed">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-3 md:p-4 space-y-3 flex flex-col md:flex-row gap-4 items-center backdrop-blur-md">
+              <div className="flex items-start gap-2.5 flex-1">
+                <Palette className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
+                <div className="text-purple-100 text-xs leading-relaxed">
                   <span className="font-semibold text-amber-300">Stylist tip: </span>
                   {currentProfile.stylistTip}
                 </div>
               </div>
 
               {/* Recommended Color Swatches */}
-              <div className="flex items-center justify-around md:justify-end gap-3 w-full md:w-auto border-t md:border-t-0 border-white/10 pt-4 md:pt-0">
+              <div className="flex items-center justify-around md:justify-end gap-2.5 w-full md:w-auto border-t md:border-t-0 border-white/10 pt-2.5 md:pt-0 shrink-0">
                 {currentProfile.recommendedColors.map((color, index) => (
-                  <div key={index} className="flex flex-col items-center gap-1.5">
+                  <div key={index} className="flex flex-col items-center gap-1">
                     <div
-                      className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white/80 shadow-md transition-colors duration-300"
+                      className="w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/80 shadow-md transition-colors duration-300"
                       style={{ backgroundColor: color.hex }}
                     ></div>
-                    <span className="text-white/80 text-[10px] font-medium tracking-wide">
+                    <span className="text-white/80 text-[9px] font-medium tracking-wide">
                       {color.name}
                     </span>
                   </div>
@@ -259,22 +285,20 @@ export default function SkinTonePage() {
         </div>
       </main>
 
-      {/* Navigation Footer */}
-      <footer className="w-full max-w-xl mx-auto flex items-center justify-between gap-6 pt-4">
+      {/* Compact Uniform Footer Navigation */}
+      <footer className="relative z-10 flex justify-center items-center gap-4 pt-2 shrink-0">
         <Link
           href="/occasion"
-          className="flex-1 py-3 px-8 rounded-full border border-purple-400/30 bg-purple-900/20 hover:bg-purple-800/40 text-purple-200 text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200 text-center uppercase tracking-wider"
+          className="px-8 py-2.5 rounded-full border border-white/30 text-white/90 text-xs font-semibold tracking-widest hover:bg-white/10 hover:border-white/50 transition-all"
         >
-          <ArrowLeft className="w-4 h-4" />
-          Back
+          BACK
         </Link>
 
         <Link
-          href="/measurements"
-          className="flex-1 py-3 px-8 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-purple-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition-all duration-200 text-center uppercase tracking-widest"
+          href="/bodytype"
+          className="px-8 py-2.5 rounded-full text-xs font-bold tracking-wider bg-gradient-to-r from-amber-400 to-amber-500 text-purple-950 hover:brightness-110 shadow-lg shadow-amber-500/20 transition-all uppercase"
         >
-          Continue
-          <ArrowRight className="w-4 h-4" />
+          CONTINUE &rarr;
         </Link>
       </footer>
     </div>

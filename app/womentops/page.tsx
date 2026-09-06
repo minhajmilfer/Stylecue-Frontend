@@ -15,6 +15,7 @@ const products = [
     originalPrice: "Rs.3,790",
     discount: "41% OFF",
     imageBg: "bg-gradient-to-br from-[#d4d1cb] to-[#a3a19b]",
+    image: "/Images/V%20Neck%20Summer%20Blouse.jpeg",
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const products = [
     originalPrice: "Rs.1,590",
     discount: "25% OFF",
     imageBg: "bg-gradient-to-br from-[#e0cfc8] to-[#bca69e]",
+    image: "/Images/V%20Neck%20Linen%20Tunic.jpeg",
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const products = [
     originalPrice: "Rs.4,590",
     discount: "24% OFF",
     imageBg: "bg-gradient-to-br from-[#c9cdd1] to-[#9a9fa6]",
+    image: "/Images/Silk%20Button-Up%20Shirt.jpeg",
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ const products = [
     originalPrice: "Rs.2,490",
     discount: "24% OFF",
     imageBg: "bg-gradient-to-br from-[#8c7462] to-[#5c4a3d]",
+    image: "/Images/Ribbed%20Knit%20Top.jpeg",
   },
 ];
 
@@ -112,11 +116,21 @@ export default function TopsAndBlousesPage() {
               >
                 {/* Product Image Placeholder */}
                 <div className={`w-[40%] aspect-[3/4] rounded-2xl flex items-center justify-center shadow-inner overflow-hidden relative ${product.imageBg}`}>
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 1024px) 40vw, 20vw"
+                      className="object-cover"
+                    />
+                  ) : (
                    <span className="text-white/30 text-xs tracking-widest font-medium">[IMAGE]</span>
+                  )}
                    
                    {/* Selected Overlay Checkmark */}
                    {isSelected && (
-                     <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-amber-400 flex items-center justify-center shadow-lg animate-in zoom-in duration-200">
+                     <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-amber-400 flex items-center justify-center shadow-lg animate-in zoom-in duration-200 z-10">
                        <Check className="w-5 h-5 text-purple-950 stroke-[3]" />
                      </div>
                    )}

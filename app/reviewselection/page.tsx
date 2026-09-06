@@ -17,6 +17,7 @@ const allProductsDatabase: Record<number, any> = {
     originalPrice: "Rs.3,790",
     discount: "41% OFF",
     imageBg: "bg-gradient-to-br from-[#d4d1cb] to-[#a3a19b]",
+    image: "/Images/V%20Neck%20Summer%20Blouse.jpeg",
   },
   2: {
     id: 2,
@@ -28,6 +29,7 @@ const allProductsDatabase: Record<number, any> = {
     originalPrice: "Rs.1,590",
     discount: "25% OFF",
     imageBg: "bg-gradient-to-br from-[#e0cfc8] to-[#bca69e]",
+    image: "/Images/V%20Neck%20Linen%20Tunic.jpeg",
   },
   3: {
     id: 3,
@@ -39,6 +41,7 @@ const allProductsDatabase: Record<number, any> = {
     originalPrice: "Rs.4,590",
     discount: "24% OFF",
     imageBg: "bg-gradient-to-br from-[#c9cdd1] to-[#9a9fa6]",
+    image: "/Images/Silk%20Button-Up%20Shirt.jpeg",
   },
   4: {
     id: 4,
@@ -50,6 +53,7 @@ const allProductsDatabase: Record<number, any> = {
     originalPrice: "Rs.2,490",
     discount: "24% OFF",
     imageBg: "bg-gradient-to-br from-[#8c7462] to-[#5c4a3d]",
+    image: "/Images/Ribbed%20Knit%20Top.jpeg",
   },
 };
 
@@ -120,7 +124,18 @@ function ReviewSelectionContent() {
                   {product.discount}
                 </span>
               </div>
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
+                />
+              ) : (
               <span className="text-white/40 text-sm tracking-widest">[PREVIEW IMAGE]</span>
+              )}
             </div>
             {selectedIds.length > 1 && (
               <div className="flex justify-between items-center mt-4 px-2">

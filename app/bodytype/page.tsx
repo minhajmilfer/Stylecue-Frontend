@@ -9,37 +9,62 @@ const bodyTypes = [
     id: "slim",
     title: "Slim",
     tag: "LEAN BUILD",
-    description: "Narrow frame, straight silhouette — tailored slim fits",
+    description: "Narrower frame with a straight silhouette → Tailored, slim-fitting styles",
   },
   {
     id: "athletic",
     title: "Athletic",
     tag: "MOST COMMON",
-    description: "Defined shoulders & waist — structured, sporty cuts",
+    description: "Defined shoulders with a more structured waist → Structured and sporty styles",
   },
   {
     id: "regular",
     title: "Regular",
     tag: "BALANCED",
-    description: "Proportionate build — versatile classic fits",
+    description: "Balanced, proportionate build → Versatile, classic styles",
   },
   {
     id: "broad",
-    title: "Broad / Plus",
+    title: "Broad / Fuller",
     tag: "FULL BUILD",
-    description: "Fuller frame — relaxed, comfort-first cuts",
+    description: "Wider or fuller overall frame → Relaxed, comfortable styles",
   },
 ];
 
 export default function BodyTypePage() {
-  // Defaulting to "regular" to match your design mockup
   const [selectedType, setSelectedType] = useState<string>("regular");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#2d1b4e] via-[#3d1a58] to-[#5c1c5c] text-white flex flex-col justify-between p-8 md:p-12 font-sans">
+    <div className="relative min-h-screen bg-gradient-to-br from-[#2d1b4e] via-[#3d1a58] to-[#5c1c5c] text-white flex flex-col justify-between p-4 md:p-6 font-sans select-none overflow-hidden">
       
+      {/* Top-Left Corner Curve Signature */}
+      <div className="absolute top-0 left-0 pointer-events-none opacity-45">
+        <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M -20 200 C 70 200 200 70 200 -20" stroke="url(#cornerGradTL)" strokeWidth="2" strokeDasharray="4 4" />
+          <defs>
+            <linearGradient id="cornerGradTL" x1="0" y1="0" x2="240" y2="240" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#fbbf24" stopOpacity="0.9" />
+              <stop offset="1" stopColor="#a855f7" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      {/* Bottom-Right Corner Curve Signature */}
+      <div className="absolute bottom-0 right-0 pointer-events-none opacity-45">
+        <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 260 40 C 170 40 40 170 40 260" stroke="url(#cornerGradBR)" strokeWidth="2" strokeDasharray="4 4" />
+          <defs>
+            <linearGradient id="cornerGradBR" x1="240" y1="240" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#fbbf24" stopOpacity="0.9" />
+              <stop offset="1" stopColor="#a855f7" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
       {/* Header & Progress Bar */}
-      <header className="w-full max-w-5xl mx-auto space-y-4">
+      <header className="relative z-10 w-full max-w-5xl mx-auto space-y-1.5 shrink-0">
         <div className="flex justify-between items-center text-xs md:text-sm font-semibold tracking-wider text-purple-200/80">
           <Link href="/" className="flex items-center gap-2.5 group">
             <Image 
@@ -49,36 +74,38 @@ export default function BodyTypePage() {
               height={28} 
               priority
               style={{ width: "auto", height: "auto" }}
-              className="drop-shadow-[0_0_8px_rgba(255,255,255,0.25)] transition-transform group-hover:scale-105"
+              className="drop-shadow-[0_0_8px_rgba(255,255,255,0.25)] transition-transform group-hover:scale-105 shrink-0"
             />
-            <span className="uppercase font-bold tracking-widest text-white">
+            <span className="uppercase font-bold tracking-widest text-white text-xs md:text-sm">
               STYLECUE
             </span>
           </Link>
-          <span className="text-amber-400">STEP 6 OF 6 (100%)</span>
+          <span className="text-amber-400 text-xs font-semibold">STEP 5 OF 6 (83%)</span>
         </div>
 
-        <p className="text-[10px] tracking-widest text-white/60 font-medium mb-3 uppercase">
+        <p className="text-[10px] tracking-widest text-white/60 font-medium uppercase">
           AI Stylist Assistant Path
         </p>
         
         <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-          {/* 100% full progress bar */}
-          <div className="bg-amber-400 h-full w-full rounded-full shadow-[0_0_8px_rgba(251,191,36,0.6)] transition-all duration-500"></div>
+          <div 
+            className="bg-amber-400 h-full rounded-full shadow-[0_0_8px_rgba(251,191,36,0.6)] transition-all duration-500" 
+            style={{ width: "83%" }}
+          />
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex flex-col items-center text-center my-auto w-full max-w-4xl mx-auto py-10">
-        <h1 className="text-4xl md:text-[2.75rem] font-light tracking-wide mb-3">
+      <main className="relative z-10 flex flex-col items-center text-center my-auto w-full max-w-4xl mx-auto py-2">
+        <h1 className="text-3xl md:text-4xl font-light tracking-wide mb-2">
           Your Body Type
         </h1>
-        <p className="text-gray-300 text-sm md:text-base mb-12">
+        <p className="text-purple-200/80 text-sm md:text-base mb-6 max-w-lg font-light">
           Select your build for the most flattering fit. We tailor recommendations to match your body type precisely.
         </p>
 
         {/* 2x2 Grid for Body Types */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full max-w-3xl px-2">
           {bodyTypes.map((type) => {
             const isSelected = selectedType === type.id;
 
@@ -86,19 +113,20 @@ export default function BodyTypePage() {
               <button
                 key={type.id}
                 onClick={() => setSelectedType(type.id)}
-                className={`relative flex flex-col text-left p-6 md:p-8 rounded-2xl transition-all duration-300 backdrop-blur-sm border ${
+                className={`relative flex flex-col text-left p-4 md:p-5 rounded-2xl transition-all duration-300 backdrop-blur-md border cursor-pointer ${
                   isSelected
-                    ? "bg-white/5 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.15)]"
+                    ? "bg-white/5 border-amber-400/90 shadow-[0_0_15px_rgba(251,191,36,0.15)] scale-[1.01]"
                     : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                 }`}
               >
-                <div className="flex justify-between items-center w-full mb-3">
-                  <h3 className="text-xl font-semibold tracking-wide">
+                <div className="flex justify-between items-center w-full mb-2">
+                  <h3 className="text-sm md:text-base font-semibold tracking-wide text-white">
                     {type.title}
                   </h3>
+                  
                   {/* Dynamic Pill Tag */}
                   <span
-                    className={`text-[10px] px-3 py-1 rounded-full font-bold tracking-wider uppercase transition-colors ${
+                    className={`text-[9px] px-2.5 py-0.5 rounded-full font-bold tracking-wider uppercase transition-colors ${
                       isSelected
                         ? "bg-amber-400 text-purple-950"
                         : "bg-white/10 text-white/70"
@@ -108,8 +136,8 @@ export default function BodyTypePage() {
                   </span>
                 </div>
                 
-                <p className={`text-sm tracking-wide transition-colors ${
-                  isSelected ? "text-white/90" : "text-white/60"
+                <p className={`text-xs leading-relaxed transition-colors ${
+                  isSelected ? "text-white/90" : "text-purple-200/60"
                 }`}>
                   {type.description}
                 </p>
@@ -120,23 +148,19 @@ export default function BodyTypePage() {
       </main>
 
       {/* Footer Navigation */}
-      <footer className="flex justify-center items-center gap-4 pb-6 mt-8">
+      <footer className="relative z-10 w-full max-w-5xl mx-auto flex justify-center gap-4 items-center pb-2">
         <Link
-          href="/measurements"
-          className="px-10 py-3.5 rounded-full border border-white/40 text-white text-sm font-semibold tracking-widest hover:bg-white/10 transition-all"
+          href="/skintone"
+          className="px-8 py-2.5 rounded-full border border-white/30 text-white/90 text-xs font-semibold tracking-widest hover:bg-white/10 hover:border-white/50 transition-all"
         >
           BACK
         </Link>
         
-        {/* Final CTA Button with Sparkle Icon */}
         <Link
-          href="/results" // Or wherever this flow concludes
-          className="px-8 py-3.5 rounded-full text-sm font-bold tracking-widest transition-all flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-purple-950 hover:brightness-110 shadow-[0_0_25px_rgba(251,191,36,0.4)]"
+          href="/measurements"
+          className="px-8 py-2.5 rounded-full text-xs md:text-sm font-bold tracking-wider bg-gradient-to-r from-amber-400 to-amber-500 text-purple-950 hover:brightness-110 shadow-lg shadow-amber-500/20 transition-all uppercase flex items-center gap-2"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-          </svg>
-          FIND MY OUTFIT
+          CONTINUE &rarr;
         </Link>
       </footer>
     </div>
