@@ -1,6 +1,10 @@
 "use client";
 
+<<<<<<< HEAD
+import { useState, useEffect } from "react";
+=======
 import { useState } from "react";
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
 import Link from "next/link";
 import Image from "next/image";
 
@@ -34,6 +38,24 @@ const bodyTypes = [
 export default function BodyTypePage() {
   const [selectedType, setSelectedType] = useState<string>("regular");
 
+<<<<<<< HEAD
+  // If the customer already picked a body type earlier in this visit
+  // (e.g. they went BACK and came here again), remember their previous pick.
+  useEffect(() => {
+    const saved = localStorage.getItem("stylecue_body_type");
+    if (saved) setSelectedType(saved);
+  }, []);
+
+  // Every time they pick a body type, save it to the shared notebook
+  // (localStorage) so the measurements page can find it later and send it
+  // to the backend together with height/waist.
+  const handleSelect = (id: string) => {
+    setSelectedType(id);
+    localStorage.setItem("stylecue_body_type", id);
+  };
+
+=======
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-[#2d1b4e] via-[#3d1a58] to-[#5c1c5c] text-white flex flex-col justify-between p-4 md:p-6 font-sans select-none overflow-hidden">
       
@@ -112,7 +134,11 @@ export default function BodyTypePage() {
             return (
               <button
                 key={type.id}
+<<<<<<< HEAD
+                onClick={() => handleSelect(type.id)}
+=======
                 onClick={() => setSelectedType(type.id)}
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
                 className={`relative flex flex-col text-left p-4 md:p-5 rounded-2xl transition-all duration-300 backdrop-blur-md border cursor-pointer ${
                   isSelected
                     ? "bg-white/5 border-amber-400/90 shadow-[0_0_15px_rgba(251,191,36,0.15)] scale-[1.01]"

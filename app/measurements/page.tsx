@@ -1,9 +1,19 @@
 "use client";
 
 import { useState } from "react";
+<<<<<<< HEAD
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
+// This is your backend's address - set in .env.local as NEXT_PUBLIC_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+=======
+import Link from "next/link";
+import Image from "next/image";
+
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
 // Global standard measurements mapping
 const standardMeasurements: Record<string, { height: string; waist: string }> = {
   XS: { height: "160", waist: "24" },
@@ -14,10 +24,42 @@ const standardMeasurements: Record<string, { height: string; waist: string }> = 
   XXL: { height: "182", waist: "34" },
 };
 
+<<<<<<< HEAD
+// Gets the current session ID from the browser's storage, or creates a new
+// one by asking the backend, if this is the customer's first screen.
+async function getOrCreateSessionId(): Promise<string> {
+  const existing = localStorage.getItem("stylecue_session_id");
+  if (existing) return existing;
+
+  // kioskId identifies which store's kiosk this is. For now this is
+  // hardcoded to "1" (the first store in your database) - later this
+  // should come from however you identify which kiosk is running the app.
+  const kioskId = localStorage.getItem("stylecue_kiosk_id") || "1";
+
+  const res = await fetch(`${API_URL}/sessions`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kioskId }),
+  });
+  if (!res.ok) throw new Error("Could not start a session with the backend");
+  const data = await res.json();
+  localStorage.setItem("stylecue_session_id", data.sessionId);
+  return data.sessionId;
+}
+
+export default function MeasurementsPage() {
+  const router = useRouter();
+  const [height, setHeight] = useState<string>("");
+  const [waist, setWaist] = useState<string>("");
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+=======
 export default function MeasurementsPage() {
   const [height, setHeight] = useState<string>("");
   const [waist, setWaist] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
 
   // Handle clicking a general size button
   const handleSizeClick = (size: string) => {
@@ -33,6 +75,43 @@ export default function MeasurementsPage() {
     if (field === "waist") setWaist(value);
   };
 
+<<<<<<< HEAD
+  // Saves the measurements to the backend, then moves to the next screen.
+  const handleContinue = async () => {
+    if (!height && !waist && !selectedSize) return; // nothing entered yet
+
+    setIsSaving(true);
+    setErrorMessage(null);
+    try {
+      const sessionId = await getOrCreateSessionId();
+      const bodyType = localStorage.getItem("stylecue_body_type");
+
+      const res = await fetch(`${API_URL}/sessions/${sessionId}/measurements`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          heightCm: parseFloat(height),
+          waistInches: parseFloat(waist),
+          standardSize: selectedSize || null,
+          bodyType: bodyType || null,
+        }),
+      });
+
+      if (!res.ok) throw new Error("The backend rejected the measurements");
+
+      router.push("/results");
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("Something went wrong saving your measurements. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const canContinue = Boolean(height || waist || selectedSize);
+
+=======
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
   return (
     <div className="relative h-screen max-h-screen overflow-hidden bg-gradient-to-br from-[#2d1b4e] via-[#3d1a58] to-[#5c1c5c] text-white flex flex-col justify-between p-6 md:p-10 font-sans select-none">
       
@@ -162,6 +241,13 @@ export default function MeasurementsPage() {
             );
           })}
         </div>
+<<<<<<< HEAD
+
+        {errorMessage && (
+          <p className="text-red-300 text-xs mt-4">{errorMessage}</p>
+        )}
+=======
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
       </main>
 
       {/* Footer Navigation (Identical layout/styling to Category page) */}
@@ -173,16 +259,29 @@ export default function MeasurementsPage() {
           BACK
         </Link>
         
+<<<<<<< HEAD
+        <button
+          onClick={handleContinue}
+          disabled={!canContinue || isSaving}
+          className={`px-8 py-2.5 rounded-full text-xs font-bold tracking-widest transition-all uppercase flex items-center gap-2 ${
+            canContinue && !isSaving
+=======
         <Link
           href="/results"
           className={`px-8 py-2.5 rounded-full text-xs font-bold tracking-widest transition-all uppercase flex items-center gap-2 ${
             height || waist || selectedSize
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
               ? "bg-amber-400 text-purple-950 hover:bg-amber-300 shadow-lg shadow-amber-500/20"
               : "bg-white/10 text-white/40 pointer-events-none"
           }`}
         >
+<<<<<<< HEAD
+          {isSaving ? "SAVING..." : <>FIND MY OUTFIT &rarr;</>}
+        </button>
+=======
           FIND MY OUTFIT &rarr;
         </Link>
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
       </footer>
     </div>
   );
