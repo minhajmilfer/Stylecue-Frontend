@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Palette } from "lucide-react";
@@ -99,6 +99,24 @@ export default function SkinTonePage() {
     skinTonePalette.find(
       (item) => sliderValue >= item.range[0] && sliderValue <= item.range[1]
     ) || skinTonePalette[3];
+
+  // If the customer already moved this slider earlier in this visit
+  // (e.g. they went BACK and came here again), remember their previous spot.
+  useEffect(() => {
+    const saved = localStorage.getItem("stylecue_skintone_slider");
+    if (saved) setSliderValue(Number(saved));
+  }, []);
+
+  // Every time the slider moves, save the matched skin tone's recommended
+  // colors to the shared notebook (localStorage) so the results page can
+  // send them to the backend as preferredColors.
+  useEffect(() => {
+    localStorage.setItem("stylecue_skintone_slider", String(sliderValue));
+    localStorage.setItem(
+      "stylecue_preferred_colors",
+      JSON.stringify(currentProfile.recommendedColors.map((c) => c.name))
+    );
+  }, [sliderValue, currentProfile]);
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-[#2d1b4e] via-[#3d1a58] to-[#5c1c5c] text-white flex flex-col justify-between p-4 md:p-6 font-sans select-none overflow-hidden">

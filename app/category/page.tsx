@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,24 +14,31 @@ export default function CategoryPage() {
     "Sports Wear",
     "Outerwear",
     "Footwear",
-<<<<<<< HEAD
-=======
     "Loungewear",
     "Workwear",
     "Party Wear",
->>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
   ];
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([
     "Casual Wear",
   ]);
 
+  // If the customer already picked categories earlier in this visit
+  // (e.g. they went BACK and came here again), remember their previous picks.
+  useEffect(() => {
+    const saved = localStorage.getItem("stylecue_style_tags");
+    if (saved) setSelectedCategories(JSON.parse(saved));
+  }, []);
+
   const toggleCategory = (category: string) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((item) => item !== category));
-    } else {
-      setSelectedCategories([...selectedCategories, category]);
-    }
+    const updated = selectedCategories.includes(category)
+      ? selectedCategories.filter((item) => item !== category)
+      : [...selectedCategories, category];
+
+    setSelectedCategories(updated);
+    // Save every change to the shared notebook (localStorage) so the
+    // results page can find it later and send it to the backend as styleTags.
+    localStorage.setItem("stylecue_style_tags", JSON.stringify(updated));
   };
 
   return (
