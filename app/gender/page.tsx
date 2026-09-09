@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -47,8 +47,18 @@ const shoppingCategories = [
 export default function TargetGenderPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>("women");
 
+  // If the customer already picked a gender earlier in this visit
+  // (e.g. they went BACK and came here again), remember their previous pick.
+  useEffect(() => {
+    const saved = localStorage.getItem("stylecue_gender");
+    if (saved) setSelectedCategory(saved);
+  }, []);
+
+  // Save every pick to the shared notebook (localStorage) so the results
+  // page can find it later and use it to fetch real recommendations.
   const handleSelect = (id: string) => {
     setSelectedCategory(id);
+    localStorage.setItem("stylecue_gender", id);
   };
 
   const activeCategory = shoppingCategories.find(c => c.id === selectedCategory);

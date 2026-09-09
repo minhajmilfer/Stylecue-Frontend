@@ -1,11 +1,25 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function OccasionPage() {
   const [selected, setSelected] = useState('casual');
+
+  // If the customer already picked an occasion earlier in this visit
+  // (e.g. they went BACK and came here again), remember their previous pick.
+  useEffect(() => {
+    const saved = localStorage.getItem("stylecue_occasion");
+    if (saved) setSelected(saved);
+  }, []);
+
+  // Save every pick to the shared notebook (localStorage) so the results
+  // page can find it later and send it to the backend as "occasion".
+  const handleSelect = (id: string) => {
+    setSelected(id);
+    localStorage.setItem("stylecue_occasion", id);
+  };
 
   const occasions = [
     {
@@ -122,7 +136,7 @@ export default function OccasionPage() {
             return (
               <button
                 key={item.id}
-                onClick={() => setSelected(item.id)}
+                onClick={() => handleSelect(item.id)}
                 className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all duration-300 backdrop-blur-md text-left w-full ${
                   isSelected
                     ? 'border-2 border-amber-400 bg-white/10 shadow-[0_0_20px_rgba(251,191,36,0.15)] scale-[1.01]'
