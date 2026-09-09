@@ -14,6 +14,12 @@ export default function CategoryPage() {
     "Sports Wear",
     "Outerwear",
     "Footwear",
+<<<<<<< HEAD
+=======
+    "Loungewear",
+    "Workwear",
+    "Party Wear",
+>>>>>>> 5c915a49049f50e4b7ffc5972423d33aab2c7bc3
   ];
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([
