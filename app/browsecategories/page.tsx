@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Search, ChevronLeft } from "lucide-react";
+import { getDisplayImageUrl } from "@/lib/imageUrl";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -208,7 +209,7 @@ export default function BrowsePage() {
                   >
                     {card.imageUrl ? (
                       <Image
-                        src={card.imageUrl}
+                        src={getDisplayImageUrl(card.imageUrl)!}
                         alt={card.category}
                         fill
                         sizes="(max-width: 640px) 50vw, 25vw"

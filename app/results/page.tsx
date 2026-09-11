@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { getDisplayImageUrl } from "@/lib/imageUrl";
 
 // This is your backend's address - set in .env.local as NEXT_PUBLIC_API_URL
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -246,7 +247,7 @@ export default function ResultsPage() {
                     <div className="relative w-full h-16 md:h-20 rounded-lg mb-1 overflow-hidden border border-white/10 bg-black/20 flex items-center justify-center">
                       {item.imageUrl ? (
                         <Image
-                          src={item.imageUrl}
+                          src={getDisplayImageUrl(item.imageUrl)!}
                           alt={item.name}
                           fill
                           sizes="128px"
@@ -275,7 +276,7 @@ export default function ResultsPage() {
                 <div className="relative w-full h-[220px] md:h-[260px] rounded-xl overflow-hidden bg-black/20 flex flex-col items-center justify-center">
                   {selectedItem?.imageUrl ? (
                     <Image
-                      src={selectedItem.imageUrl}
+                      src={getDisplayImageUrl(selectedItem.imageUrl)!}
                       alt={selectedItem.name}
                       fill
                       sizes="280px"
@@ -327,7 +328,7 @@ export default function ResultsPage() {
                     <div className="relative w-full h-16 md:h-20 rounded-lg mb-1 overflow-hidden border border-white/10 bg-black/20 flex items-center justify-center">
                       {item.imageUrl ? (
                         <Image
-                          src={item.imageUrl}
+                          src={getDisplayImageUrl(item.imageUrl)!}
                           alt={item.name}
                           fill
                           sizes="128px"

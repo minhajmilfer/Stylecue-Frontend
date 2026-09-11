@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag } from "lucide-react";
+import { getDisplayImageUrl } from "@/lib/imageUrl";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -179,7 +180,7 @@ export default function CartPage() {
                     {/* Product Thumbnail Placeholder / Image Box */}
                     <div className="w-11 h-11 md:w-12 md:h-12 rounded-lg bg-purple-900/40 border border-white/10 flex items-center justify-center shrink-0 overflow-hidden shadow-inner">
                       {item.imageUrl ? (
-                        <Image src={item.imageUrl} alt={item.name} width={48} height={48} className="object-cover" />
+                        <Image src={getDisplayImageUrl(item.imageUrl)!} alt={item.name} width={48} height={48} className="object-cover" />
                       ) : (
                         <ShoppingBag className="w-4 h-4 text-amber-300/70" />
                       )}

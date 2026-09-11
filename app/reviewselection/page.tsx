@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { getDisplayImageUrl } from "@/lib/imageUrl";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const sizes = ["XS", "S", "M", "L"];
@@ -173,7 +174,7 @@ function ReviewSelectionContent() {
               >
                 {product.imageUrl ? (
                   <Image
-                    src={product.imageUrl}
+                    src={getDisplayImageUrl(product.imageUrl)!}
                     alt={product.name}
                     fill
                     priority

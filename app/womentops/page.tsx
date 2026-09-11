@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { getDisplayImageUrl } from "@/lib/imageUrl";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -149,7 +150,7 @@ function CategoryListingContent() {
                   >
                     {product.imageUrl ? (
                       <Image
-                        src={product.imageUrl}
+                        src={getDisplayImageUrl(product.imageUrl)!}
                         alt={product.name}
                         fill
                         sizes="(max-width: 768px) 112px, 128px"
