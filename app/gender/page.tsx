@@ -31,10 +31,10 @@ const shoppingCategories = [
     ),
   },
   {
-    id: "kids",
-    title: "Kids",
-    subtitle: "Comfortable & Playful",
-    matchCount: 415,
+    id: "boys",
+    title: "Boys",
+    subtitle: "Playful & Durable",
+    matchCount: 210,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-6 h-6">
         <path strokeLinecap="round" strokeLinejoin="round" d="M8 5h8l2 3v4h-1.5v7h-3v-4h-3v4h-3v-7H5V8l2-3z" />
@@ -42,10 +42,22 @@ const shoppingCategories = [
       </svg>
     ),
   },
+  {
+    id: "girls",
+    title: "Girls",
+    subtitle: "Comfortable & Sweet",
+    matchCount: 205,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l1.8 3.8L18 7.5l-2.6 3 0.6 4.5-4-2-4 2 0.6-4.5L5 7.5l4.2-0.7L12 3z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v6" />
+      </svg>
+    ),
+  },
 ];
 
 export default function TargetGenderPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>("women");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // If the customer already picked a gender earlier in this visit
   // (e.g. they went BACK and came here again), remember their previous pick.
@@ -141,7 +153,7 @@ export default function TargetGenderPage() {
         </p>
 
         {/* Selection Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 w-full max-w-3xl px-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-3xl px-2">
           {shoppingCategories.map((category) => {
             const isSelected = selectedCategory === category.id;
 

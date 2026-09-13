@@ -9,12 +9,9 @@ export default function CategoryPage() {
     "Casual Wear",
     "Formal Wear",
     "Accessories",
-    "Ethnic Wear",
-    "Swimwear",
     "Sports Wear",
     "Outerwear",
     "Footwear",
-    "Loungewear",
     "Workwear",
     "Party Wear",
   ];
